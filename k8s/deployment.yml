@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-app-dep
+  namespace: metrics
+  labels:
+    app: metrics-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: metrics-app
+  template:
+    metadata:
+      labels:
+        app: metrics-app
+    spec:
+      containers:
+        - name: metrics-container
+          image: localhost:5000/metrics:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
